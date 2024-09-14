@@ -48,68 +48,219 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //--------LISTA DE CATEGORIAS-------
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //--------LISTA DE CATEGORIAS-------
 
-            Container(
-              margin: const EdgeInsets.only(left: 10),
-              height: 70,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: category.length,
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                    image: category[index].categoryImage!,
-                    categoryName: category[index].categoryName!,
-                  );
-                },
+              Container(
+                margin: const EdgeInsets.only(left: 10),
+                height: 70,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: category.length,
+                  itemBuilder: (context, index) {
+                    return CategoryTile(
+                      image: category[index].categoryImage!,
+                      categoryName: category[index].categoryName!,
+                    );
+                  },
+                ),
               ),
-            ),
 
-            //--------CARRUSEL-------
+              //--------CARRUSEL-------
 
-            const SizedBox(
-              height: 30,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text("Ultimas Noticias!",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CarouselSlider.builder(
-              itemCount: slider.length,
-              itemBuilder: (context, index, relaIndex) {
-                String res = slider[index].sliderImage!;
-                String res1 = slider[index].sliderName!;
-                return buildImage(res!, index, res1!);
-              },
-              options: CarouselOptions(
-                  height: 250,
-                  autoPlay: false,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      activeIndex = index;
-                    });
-                  }),
-            ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Ultimas Noticias!",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text(
+                      "Ver Todo",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CarouselSlider.builder(
+                itemCount: slider.length,
+                itemBuilder: (context, index, relaIndex) {
+                  String res = slider[index].sliderImage!;
+                  String res1 = slider[index].sliderName!;
+                  return buildImage(res!, index, res1!);
+                },
+                options: CarouselOptions(
+                    height: 250,
+                    autoPlay: false,
+                    enlargeCenterPage: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        activeIndex = index;
+                      });
+                    }),
+              ),
 
-            //--------BOTON DE CARRUSEL-------
-            const SizedBox(height: 30),
-            buildIndicator(),
-          ],
+              //--------BOTON DE CARRUSEL-------
+              const SizedBox(height: 30),
+              Center(child: buildIndicator()),
+
+              //--------CARRUSEL DE TENDENCIA-------
+
+              const SizedBox(height: 30),
+              const Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Noticias de Tendencia!",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text(
+                      "Ver Todo",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              "images/ciencia.jpg",
+                              height: 150,
+                              width: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width/2,
+                              child: const Text(
+                                "El futuro de la ciencia es un tema de debate durante mucho tiempo.",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Container(
+                              width: MediaQuery.of(context).size.width/2,
+                              child: const Text(
+                                "La ciencia mejora cada dia",
+                                style: TextStyle(
+                                  color: Colors.black38,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              "images/ciencia.jpg",
+                              height: 150,
+                              width: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width/2,
+                              child: const Text(
+                                "El futuro de la ciencia es un tema de debate durante mucho tiempo.",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Container(
+                              width: MediaQuery.of(context).size.width/2,
+                              child: const Text(
+                                "La ciencia mejora cada dia",
+                                style: TextStyle(
+                                  color: Colors.black38,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
