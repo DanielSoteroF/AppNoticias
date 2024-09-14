@@ -14,7 +14,7 @@ List<SliderModel> getSlider() {
 
   //----------------
   sliderModel.sliderName =
-      "inclinarse ante la autoridad de la fuerza silenciosa";
+      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
   sliderModel.sliderImage = "images/ciencia.jpg";
   slider.add(sliderModel);
 
@@ -22,7 +22,7 @@ List<SliderModel> getSlider() {
 
   //----------------
   sliderModel.sliderName =
-      "inclinarse ante la autoridad de la fuerza silenciosa";
+      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
   sliderModel.sliderImage = "images/deporte.jpg";
   slider.add(sliderModel);
 
@@ -30,7 +30,7 @@ List<SliderModel> getSlider() {
 
   //----------------
   sliderModel.sliderName =
-      "inclinarse ante la autoridad de la fuerza silenciosa";
+      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
   sliderModel.sliderImage = "images/entretenimiento.jpg";
   slider.add(sliderModel);
 
@@ -38,7 +38,7 @@ List<SliderModel> getSlider() {
 
   //----------------
   sliderModel.sliderName =
-      "inclinarse ante la autoridad de la fuerza silenciosa";
+      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
   sliderModel.sliderImage = "images/salud.jpg";
   slider.add(sliderModel);
 
