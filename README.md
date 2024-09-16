@@ -1,16 +1,11 @@
-# news_app
+# App Noticias 📱
 
-A new Flutter project.
+## Introduccion
+📱App Noticias es una aplicación móvil desarrollada en Flutter que permite a los usuarios acceder a las últimas noticias de manera rápida y sencilla. La aplicación recopila información de diversas fuentes confiables y presenta las noticias más relevantes de forma organizada y atractiva, ofreciendo una experiencia de usuario optimizada para dispositivos móviles.
 
-## Getting Started
+## Tecnologias Utilizadas
+- **Flutter :** Framework principal utilizado para la construcción de la interfaz de usuario y la lógica de la aplicación.
+- **API de Noticias :** La app se integra con APIs de noticias para obtener la información más actualizada.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
