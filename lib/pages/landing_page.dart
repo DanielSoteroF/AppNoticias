@@ -48,6 +48,7 @@ class _LandingPageState extends State<LandingPage> {
             ),
             
             //--------BOTON DE COMENZAR-------
+
             const SizedBox(height:40),
             Container(
               width: MediaQuery.of(context).size.width/1.2,
