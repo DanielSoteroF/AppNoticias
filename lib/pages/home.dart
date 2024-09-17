@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     category = getCategories();
-    slider = getSlider();
+    getSlider();
     getNews();
     super.initState();
   }
@@ -43,6 +43,12 @@ class _HomeState extends State<Home> {
     setState(() {
       _loading = false;
     });
+  }
+
+  getSlider() async {
+    SliderData sliderClass = SliderData();
+    await sliderClass.getSlider();
+    slider = sliderClass.slider;
   }
 
   @override
@@ -121,10 +127,10 @@ class _HomeState extends State<Home> {
                       height: 20,
                     ),
                     CarouselSlider.builder(
-                      itemCount: slider.length,
+                      itemCount: 5,
                       itemBuilder: (context, index, relaIndex) {
-                        String res = slider[index].sliderImage!;
-                        String res1 = slider[index].sliderName!;
+                        String res = slider[index].urlToImage!;
+                        String res1 = slider[index].title!;
                         return buildImage(res!, index, res1!);
                       },
                       options: CarouselOptions(
@@ -197,8 +203,8 @@ class _HomeState extends State<Home> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                image,
+              child: CachedNetworkImage(
+                imageUrl: image,
                 height: 250,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
@@ -217,6 +223,7 @@ class _HomeState extends State<Home> {
               ),
               child: Text(
                 name,
+                maxLines: 2,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -229,7 +236,7 @@ class _HomeState extends State<Home> {
 
   Widget buildIndicator() => AnimatedSmoothIndicator(
       activeIndex: activeIndex,
-      count: slider.length,
+      count: 5,
       effect: const ExpandingDotsEffect(
         activeDotColor: Colors.blue,
         dotColor: Colors.grey,

@@ -1,46 +1,37 @@
+import 'dart:convert';
 import '../models/slider_model.dart';
+//Importacion de paquete http para realizar peticiones http
+import 'package:http/http.dart' as http;
+//Importacion de paquete para convertir json a formato que puede usar Dart
+import 'dart:convert' as convert;
 
-List<SliderModel> getSlider() {
+// Clase para obtener noticias de la API de NewsAPI
+class SliderData {
   List<SliderModel> slider = [];
 
-  SliderModel sliderModel = new SliderModel();
+  Future<void> getSlider() async {
+    String url =
+        "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=055dfa92decc4711b2003ee4504cbf51";
+    // Solicitud realiza mediante http.get
+    var response = await http.get(Uri.parse(url));
 
-  sliderModel.sliderName =
-      "inclinarse ante la autoridad de la fuerza silenciosa";
-  sliderModel.sliderImage = "images/negocios.jpg";
-  slider.add(sliderModel);
+    //Aqui da respuesta de la API
+    // Convertimos la respuesta a un objeto json
+    var jsonData = jsonDecode(response.body);
 
-  sliderModel = new SliderModel();
-
-  //----------------
-  sliderModel.sliderName =
-      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
-  sliderModel.sliderImage = "images/ciencia.jpg";
-  slider.add(sliderModel);
-
-  sliderModel = new SliderModel();
-
-  //----------------
-  sliderModel.sliderName =
-      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
-  sliderModel.sliderImage = "images/deporte.jpg";
-  slider.add(sliderModel);
-
-  sliderModel = new SliderModel();
-
-  //----------------
-  sliderModel.sliderName =
-      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
-  sliderModel.sliderImage = "images/entretenimiento.jpg";
-  slider.add(sliderModel);
-
-  sliderModel = new SliderModel();
-
-  //----------------
-  sliderModel.sliderName =
-      "Inclinarse Ante La Autoridad De La Fuerza Silenciosa";
-  sliderModel.sliderImage = "images/salud.jpg";
-  slider.add(sliderModel);
-
-  return slider;
+    if (jsonData["status"] == "ok") {
+      jsonData["articles"].forEach((element) {
+        if (element["urlToImage"] != null && element["description"] != null) {}
+        SliderModel sliderModel = SliderModel(
+          title: element["title"],
+          description: element["description"],
+          url: element["url"],
+          urlToImage: element["urlToImage"],
+          content: element["content"],
+          author: element["author"],
+        );
+        slider.add(sliderModel);
+      });
+    }
+  }
 }
