@@ -10,6 +10,7 @@ import '../services/data.dart';
 import '../services/news.dart';
 import '../services/slider_data.dart';
 import 'article_view.dart';
+import 'category_news.dart';
 import 'landing_page.dart';
 
 class Home extends StatefulWidget {
@@ -177,18 +178,17 @@ class _HomeState extends State<Home> {
                     const SizedBox(height: 15),
                     Container(
                       child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemCount: articles.length,
-                        itemBuilder: (context, index) {
-                          return BlogTile(
-                            imageUrl: articles[index].urlToImage!,
-                            title: articles[index].title!,
-                            descrip: articles[index].description!,
-                            url: articles[index].url!,
-                          );
-                        }
-                      ),
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemCount: articles.length,
+                          itemBuilder: (context, index) {
+                            return BlogTile(
+                              imageUrl: articles[index].urlToImage!,
+                              title: articles[index].title!,
+                              descrip: articles[index].description!,
+                              url: articles[index].url!,
+                            );
+                          }),
                     ),
                   ],
                 ),
@@ -253,31 +253,42 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 16),
-      child: Stack(children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: Image.asset(image, width: 120, height: 70, fit: BoxFit.cover),
-        ),
-        Container(
-          width: 120,
-          height: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            color: Colors.black38,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryNews(name: categoryName),
           ),
-          child: Center(
-            child: Text(
-              categoryName,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 16),
+        child: Stack(children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child:
+                Image.asset(image, width: 120, height: 70, fit: BoxFit.cover),
+          ),
+          Container(
+            width: 120,
+            height: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: Colors.black38,
+            ),
+            child: Center(
+              child: Text(
+                categoryName,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
@@ -286,7 +297,10 @@ class BlogTile extends StatelessWidget {
   String imageUrl, title, descrip, url;
 
   BlogTile(
-      {required this.imageUrl, required this.title, required this.descrip, required this.url});
+      {required this.imageUrl,
+      required this.title,
+      required this.descrip,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +309,9 @@ class BlogTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ArticleView(blogUrl: 'url',),
+            builder: (context) => ArticleView(
+              blogUrl: 'url',
+            ),
           ),
         );
       },
