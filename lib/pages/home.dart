@@ -9,6 +9,7 @@ import '../models/slider_model.dart';
 import '../services/data.dart';
 import '../services/news.dart';
 import '../services/slider_data.dart';
+import 'article_view.dart';
 import 'landing_page.dart';
 
 class Home extends StatefulWidget {
@@ -178,6 +179,7 @@ class _HomeState extends State<Home> {
                             imageUrl: articles[index].urlToImage!,
                             title: articles[index].title!,
                             descrip: articles[index].description!,
+                            url: articles[index].url!,
                           );
                         }
                       ),
@@ -274,10 +276,10 @@ class CategoryTile extends StatelessWidget {
 }
 
 class BlogTile extends StatelessWidget {
-  String imageUrl, title, descrip;
+  String imageUrl, title, descrip, url;
 
   BlogTile(
-      {required this.imageUrl, required this.title, required this.descrip});
+      {required this.imageUrl, required this.title, required this.descrip, required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +288,7 @@ class BlogTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => LandingPage(),
+            builder: (context) => ArticleView(blogUrl: 'url',),
           ),
         );
       },
